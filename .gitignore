@@ -1,0 +1,21 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[codz]
+*$py.class
+
+# Translations
+*.mo
+*.pot
+# Django
+migrations/
+db.sqlite3
+db.sqlite3-journal
+
+# PEP 
+__pypackages__/
+
+
+
+# Environments
+.env
+.venv
