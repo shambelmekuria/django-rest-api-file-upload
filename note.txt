@@ -1,0 +1,8 @@
+- For File and Images send to backend use new FormData() class 
+- When use FormData each data send as string such as boolean and numbers so use String(values)
+ - If backend expects SINGLE CV
+    formData.append("images", data.files[0]);
+- If backend expects MULTIPLE files instead, tell me
+    data.files.forEach(file => formData.append("images", file));
+- Convert Type invalid Type in Shandcn input
+    - onChange={(e)=>field.onChange(e.target.valueAsNumber)}

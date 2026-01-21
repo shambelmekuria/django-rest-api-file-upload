@@ -25,6 +25,7 @@ import {
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field";
+import axios from "axios";
 
 const formSchema = z.object({
   files: z.array(z.instanceof(File)).min(1, "Conffffffff"),
@@ -38,16 +39,25 @@ export default function FileUploadDemo() {
     },
   });
 
+
   const onSubmit = async (data: formValues) => {
-    console.log(data)
-    toast('A Sonner toast', {
-          className: 'my-classname',
-          description: 'With a description and an icon',
-          duration: 5000,
-          icon: <Trash />,
-        });
-    
-  };
+  try {
+    const formData = new FormData();
+
+    // If backend expects SINGLE CV
+    formData.append("cv", data.files[0]);
+
+    // If backend expects MULTIPLE files instead, tell me
+    // data.files.forEach(file => formData.append("files", file));
+
+    const res = await axios.post("http://127.0.0.1:8000/upload-cv/", formData);
+    console.log(res.data);
+    toast.success("CV uploaded successfully");
+  } catch (error) {
+    toast.error("Upload failed");
+  }
+};
+
 
     const onFileReject = React.useCallback((file: File, message: string) => {
     toast(message, {
